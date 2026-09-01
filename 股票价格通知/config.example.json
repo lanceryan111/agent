@@ -1,0 +1,8 @@
+{
+  "tickers": ["AAPL", "MSFT", "NVDA", "GOOGL", "TSLA"],
+  "model": "qwen3:32b",
+  "ollama_url": "http://localhost:11434",
+  "gmail_address": "962989730w@gmail.com",
+  "gmail_app_password": "在这里填入16位应用专用密码",
+  "email_to": "962989730w@gmail.com"
+}
