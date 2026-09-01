@@ -39,3 +39,49 @@
 想更进一步的话，我可以帮你写一份可以直接放进公司仓库的 `copilot-instructions.md` 模板，或者一组常用 `.prompt.md` 提示词文件——告诉我你的具体岗位和日常工作内容就行。
 
 Sources: [GitHub Copilot Agent Mode in VS Code: Full Guide (2026)](https://lucaberton.com/blog/github-copilot-agent-mode-vscode-complete-guide/), [GitHub Copilot Agent Mode and MCP in VS Code: 2026 Guide](https://www.itechguides.com/vibe-coding-with-github-copilot-agent-mode-and-mcp-in-vs-code-updated-for-2026/), [20 Microsoft Copilot Tips and Tricks for 2026](https://reflectiveit.com/blog/microsoft-copilot-tips-and-tricks/), [What's New in Microsoft 365 Copilot | January 2026](https://techcommunity.microsoft.com/blog/microsoft365copilotblog/what%E2%80%99s-new-in-microsoft-365-copilot--january-2026/4488916)
+
+
+这个组合其实能覆盖你日常工作的大部分场景——VS Code Copilot 管代码,M365 Copilot 管文档、邮件、会议。下面按工具说说最值得养成的用法。
+
+## VS Code Copilot:别只用它补全代码
+
+大多数人只用了灰色的行内补全,那只是它能力的 10%。真正提效的是这些:
+
+**用 Chat 的不同模式干不同的活**
+
+- 行内对话(选中代码按 `Ctrl+I`):就地改代码,比如"把这段改成异步"、"加上错误处理"。改动直接以 diff 形式出现,接受或拒绝即可。
+- Chat 面板里切到 **Agent / Edits 模式**:这是现在最强的功能,可以让它跨多个文件自动完成一个任务,比如"给这个模块加单元测试"、"把配置从 JSON 迁移到 YAML",它会自己找文件、改文件、跑命令。
+- `@workspace` 提问:"这个项目里登录逻辑在哪实现的?"——接手陌生代码库时极其省时间。`@terminal` 可以解释报错,`/explain`、`/fix`、`/tests` 这些斜杠命令也值得记住。
+
+**给它写"说明书",一次配置长期受益**
+
+在仓库根目录建一个 `.github/copilot-instructions.md`,写上你们团队的代码规范、常用框架、命名习惯。之后每次对话它都会自动遵守,你不用反复交代"我们用的是 Vue 3 组合式 API"之类的背景。
+
+**喂对上下文比写好提示词更重要**
+
+Copilot 主要看你打开的文件和你用 `#file` 引用的内容。让它写代码前,把相关的类型定义、类似的已有实现打开或引用进去,质量会有肉眼可见的提升。
+
+**顺手的小功能**:提交时点一下魔棒图标自动生成 commit message;右上角可以切换模型(通常有 GPT 和 Claude 可选),复杂重构任务用推理更强的模型效果更好。
+
+## M365 Copilot:把它当作"能读你全部工作数据的助理"
+
+它最大的价值不是帮你写东西,而是它接入了你的邮件、日历、Teams 聊天和 SharePoint 文件(Microsoft Graph)。所以最有用的是**检索和汇总类**的问题:
+
+- 每天早上在 Copilot Chat(选"工作"模式)问:"总结我昨天下班后收到的重要邮件,按需要我回复的优先级排序"
+- 开会前:"我下午 3 点和 XX 的会,帮我准备:相关的邮件往来、上次会议纪要、还没关闭的行动项"
+- 找东西:"上个月谁给我发过关于预算的那个 Excel?"——比自己翻邮件快得多
+
+**各个应用里的高价值场景**:
+
+- **Teams 会议**:开启转录后,迟到或没参加的会可以直接问"我错过了什么?有什么行动项分给我?"这是很多人公认 M365 Copilot 最值钱的功能。
+- **Outlook**:长邮件串点"摘要",一秒抓住重点;写回复时让它起草再自己改。
+- **Word → PowerPoint**:先在 Word 里把内容写好(用清晰的标题结构),然后在 PPT 里让 Copilot 基于这个 Word 文档生成幻灯片,比从零让它做 PPT 效果好很多。
+- **Excel**:数据先格式化成"表格"(Ctrl+T),然后用自然语言让它加公式列、做透视分析、找异常值。
+
+**提示词公式**:目标 + 背景 + 数据来源 + 输出要求。比如不说"写个邮件",而说"给客户 X 写一封跟进邮件,基于上周四的会议纪要,语气正式,不超过 150 字,结尾约下周通话"。
+
+## 两个通用心法
+
+一是**让 AI 出初稿,你做编辑**——审阅修改永远比从零创作快,这是这两个工具提效的本质。二是**别一句话怼过去就期待完美结果**,把它当实习生:先给背景,看初稿,再说"第二段展开一点"、"用词太正式了"迭代两三轮,质量远好于一次性长提示。
+
+另外提醒一句:具体功能会因公司购买的许可证和 IT 管理员的设置而不同(比如 Agent 模式、模型选择、Teams 转录可能被关闭),如果发现某个功能没有,可以找 IT 确认是否启用。想深入的话,M365 Copilot 里自带的 Copilot 提示词库(Prompt Gallery)和 VS Code 文档里的 Copilot customization 章节都值得翻一翻。
